@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beat My Score · Sumo Scuffle</title>
+<meta property="og:title" content="Can you beat my Sumo Scuffle score?">
+<meta property="og:description" content="Today's Daily Challenge: eat the most, shove the rest.">
+<style>
+  :root { --red: #d3212a; --cream: #fff3dc; --ink: #1c1618; --gold: #e8b23a; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font: 18px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; text-align: center; }
+  main { max-width: 520px; margin: 0 auto; padding: 48px 20px 60px; }
+  h1 { color: var(--red); font-size: 30px; margin: 0 0 8px; }
+  .score { font-size: 72px; font-weight: 900; color: var(--red); margin: 8px 0 0; line-height: 1; }
+  .day { color: #6a5a52; margin: 6px 0 28px; }
+  a.btn { display: block; margin: 12px auto; padding: 16px 20px; border-radius: 16px; font-weight: 800; text-decoration: none; max-width: 360px; }
+  a.open { background: var(--red); color: var(--cream); }
+  a.get { background: var(--gold); color: var(--ink); }
+  .note { color: #6a5a52; font-size: 15px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Can you beat this?</h1>
+  <p class="score" id="score">?</p>
+  <p class="day" id="day">points in the Sumo Scuffle Daily Challenge</p>
+  <a class="btn open" id="open" href="sumoscuffle://daily">Play the Daily Challenge</a>
+  <a class="btn get" id="get" href="https://bbrook28.github.io/sumo-scuffle/">Get Sumo Scuffle</a>
+  <p class="note">Everyone gets the same Daily Challenge each day: same arena, same rules. Free on iPhone and iPad.</p>
+</main>
+<script>
+  // ?d=YYYY-MM-DD&s=SCORE from the share link. The App Store link goes in
+  // APP_STORE once the app is live (App Store Connect > App Information > Apple ID).
+  const APP_STORE = "";
+  const q = new URLSearchParams(location.search);
+  const s = parseInt(q.get("s") || "", 10);
+  const d = (q.get("d") || "").replace(/[^0-9-]/g, "");
+  if (!isNaN(s)) document.getElementById("score").textContent = s;
+  if (d) {
+    const t = new Date(d + "T12:00:00");
+    if (!isNaN(t)) document.getElementById("day").textContent = "points in the Sumo Scuffle Daily Challenge on " + t.toLocaleDateString(undefined, { month: "long", day: "numeric" });
+  }
+  document.getElementById("open").href = "sumoscuffle://daily?d=" + encodeURIComponent(d) + "&s=" + (isNaN(s) ? "" : s);
+  if (APP_STORE) document.getElementById("get").href = APP_STORE;
+</script>
+</body>
+</html>
