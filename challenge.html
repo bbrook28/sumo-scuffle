@@ -29,9 +29,8 @@
   <p class="note">Everyone gets the same Daily Challenge each day: same arena, same rules. Free on iPhone and iPad.</p>
 </main>
 <script>
-  // ?d=YYYY-MM-DD&s=SCORE from the share link. The App Store link goes in
-  // APP_STORE once the app is live (App Store Connect > App Information > Apple ID).
-  const APP_STORE = "";
+  // ?d=YYYY-MM-DD&s=SCORE from the share link.
+  const APP_STORE = "https://apps.apple.com/app/sumo-scuffle/id6826739085";
   const q = new URLSearchParams(location.search);
   const s = parseInt(q.get("s") || "", 10);
   const d = (q.get("d") || "").replace(/[^0-9-]/g, "");
